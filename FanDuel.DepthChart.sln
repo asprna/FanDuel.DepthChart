@@ -9,11 +9,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4F8F1835-737
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9C497F5F-63D4-43A1-96E8-16D231D6BC61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Application", "src\FanDuel.DepthChart.Application\FanDuel.DepthChart.Application.csproj", "{EE16C267-8860-4169-AC79-037FDBB35D43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Application", "src\FanDuel.DepthChart.Application\FanDuel.DepthChart.Application.csproj", "{EE16C267-8860-4169-AC79-037FDBB35D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Domain", "src\FanDuel.DepthChart.Domain\FanDuel.DepthChart.Domain.csproj", "{22C3F9DD-03E4-42FC-B845-8318BEBAA489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Domain", "src\FanDuel.DepthChart.Domain\FanDuel.DepthChart.Domain.csproj", "{22C3F9DD-03E4-42FC-B845-8318BEBAA489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Infrastructure", "src\FanDuel.DepthChart.Infrastructure\FanDuel.DepthChart.Infrastructure.csproj", "{AF93C512-7599-4F83-A27B-DE67E0EE8272}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Infrastructure", "src\FanDuel.DepthChart.Infrastructure\FanDuel.DepthChart.Infrastructure.csproj", "{AF93C512-7599-4F83-A27B-DE67E0EE8272}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App_Data", "App_Data", "{CC66D8AC-4BA3-43E6-AFF0-16731981D540}"
+	ProjectSection(SolutionItems) = preProject
+		App_Data\FanDuelDepthChart.db = App_Data\FanDuelDepthChart.db
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
