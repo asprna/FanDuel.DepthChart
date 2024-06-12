@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.ConsoleApp", "src\FanDuel.DepthChart.ConsoleApp\FanDuel.DepthChart.ConsoleApp.csproj", "{BA1A8D83-936F-4F99-90BE-66CDA040850F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4F8F1835-7374-4679-B070-359B4A9D27AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9C497F5F-63D4-43A1-96E8-16D231D6BC61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Application", "src\FanDuel.DepthChart.Application\FanDuel.DepthChart.Application.csproj", "{EE16C267-8860-4169-AC79-037FDBB35D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Domain", "src\FanDuel.DepthChart.Domain\FanDuel.DepthChart.Domain.csproj", "{22C3F9DD-03E4-42FC-B845-8318BEBAA489}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Infrastructure", "src\FanDuel.DepthChart.Infrastructure\FanDuel.DepthChart.Infrastructure.csproj", "{AF93C512-7599-4F83-A27B-DE67E0EE8272}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE16C267-8860-4169-AC79-037FDBB35D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE16C267-8860-4169-AC79-037FDBB35D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE16C267-8860-4169-AC79-037FDBB35D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE16C267-8860-4169-AC79-037FDBB35D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C3F9DD-03E4-42FC-B845-8318BEBAA489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C3F9DD-03E4-42FC-B845-8318BEBAA489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C3F9DD-03E4-42FC-B845-8318BEBAA489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C3F9DD-03E4-42FC-B845-8318BEBAA489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BA1A8D83-936F-4F99-90BE-66CDA040850F} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
+		{EE16C267-8860-4169-AC79-037FDBB35D43} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
+		{22C3F9DD-03E4-42FC-B845-8318BEBAA489} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
+		{AF93C512-7599-4F83-A27B-DE67E0EE8272} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD4F5195-99A5-4C09-891D-E75E0F5B8B85}
+	EndGlobalSection
+EndGlobal
