@@ -10,9 +10,9 @@ namespace FanDuel.DepthChart.API.Controllers
         [Produces("application/json")]
         [ProducesResponseType(typeof(AddSportsCommand), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Post([FromBody] AddSportsCommand product)
+        public async Task<IActionResult> Post([FromBody] AddSportsCommand sport)
         {
-            var result = await Mediator.Send(product);
+            var result = await Mediator.Send(sport);
             return Ok(result);
         }
     }

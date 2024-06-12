@@ -52,4 +52,11 @@ namespace FanDuel.DepthChart.Application.Exceptions
         {
         }
     }
+
+    /// <summary>
+    /// Return Http No Content when the entity is not found.
+    /// </summary>
+    public class NoContentException(string details) : AppException((int)HttpStatusCode.NoContent, "No Content", details)
+    {
+    }
 }

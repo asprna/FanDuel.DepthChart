@@ -20,9 +20,9 @@ namespace FanDuel.DepthChart.Application.Features.Sports.Commands
         public List<string> Positions { get; set; }
     }
 
-    public class AddProductCommandValidator : AbstractValidator<AddSportsCommand>
+    public class AddSportsCommandValidator : AbstractValidator<AddSportsCommand>
     {
-        public AddProductCommandValidator()
+        public AddSportsCommandValidator()
         {
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage("Name is required")
