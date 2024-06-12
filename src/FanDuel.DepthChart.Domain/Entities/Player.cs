@@ -14,5 +14,7 @@ namespace FanDuel.DepthChart.Domain.Entities
 
         public int TeamId { get; set; }
         public Team Team { get; set; }
+
+        public ICollection<PlayerChartIndex> PlayerChartIndexs { get; } = new List<PlayerChartIndex>();
     }
 }

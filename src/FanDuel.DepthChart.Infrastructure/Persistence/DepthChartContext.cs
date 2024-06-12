@@ -44,12 +44,32 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
                 .IsRequired();
 
             modelBuilder.Entity<Team>()
+                .HasMany(e => e.TeamDepthCharts)
+                .WithOne(e => e.Team)
+                .HasForeignKey(e => e.TeamId);
+
+            modelBuilder.Entity<Team>()
                 .Property(e => e.Name)
                 .IsRequired();
 
             modelBuilder.Entity<Player>()
                 .Property(e => e.Name)
                 .IsRequired();
+
+            modelBuilder.Entity<TeamDepthChart>()
+                .HasMany(e => e.PlayerChartIndexs)
+                .WithOne(e => e.TeamDepthChart)
+                .HasForeignKey(e => e.TeamDepthChartId);
+
+            modelBuilder.Entity<Player>()
+                .HasMany(e => e.PlayerChartIndexs)
+                .WithOne(e => e.Player)
+                .HasForeignKey(e => e.PayerId);
+
+            modelBuilder.Entity<Position>()
+                .HasMany(e => e.PlayerChartIndexs)
+                .WithOne(e => e.Position)
+                .HasForeignKey(e => e.PositionId);
         }
 
         public DbSet<Sport> Sports { get; set; }

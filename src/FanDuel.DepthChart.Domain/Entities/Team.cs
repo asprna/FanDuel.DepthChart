@@ -15,5 +15,6 @@ namespace FanDuel.DepthChart.Domain.Entities
         public Sport Sport { get; set; }
 
         public ICollection<Player> Players { get; } = new List<Player>();
+        public ICollection<TeamDepthChart> TeamDepthCharts { get; } = new List<TeamDepthChart>();
     }
 }
