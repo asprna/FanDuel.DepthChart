@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FanDuel.DepthChart.Application.Features.Players.Commands;
 using FanDuel.DepthChart.Application.Features.Sports.Commands;
 using FanDuel.DepthChart.Application.Features.Teams.Commands;
 using FanDuel.DepthChart.Domain.Entities;
@@ -19,8 +20,8 @@ namespace FanDuel.DepthChart.Application.Mappings
             .ForMember(dest => dest.Id, opt => opt.Ignore());
 
             CreateMap<AddTeamsCommand, Team>();
-                //.ForMember(dest => dest.Name, s => s.MapFrom(s => s.Name))
-                //.ForMember(dest => dest.SportId, s => s.MapFrom(s => s.SportId));
+
+            CreateMap<AddPlayersCommand, Player>();
         }
     }
 }

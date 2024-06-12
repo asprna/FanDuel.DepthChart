@@ -59,4 +59,11 @@ namespace FanDuel.DepthChart.Application.Exceptions
     public class NoContentException(string details) : AppException((int)HttpStatusCode.NoContent, "No Content", details)
     {
     }
+
+    /// <summary>
+    /// Return Http Conflict.
+    /// </summary>
+    public class ConflictException(string details) : AppException((int)HttpStatusCode.Conflict, "Conflict", details)
+    {
+    }
 }
