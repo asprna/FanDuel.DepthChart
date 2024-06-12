@@ -12,7 +12,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "TeamDepthChart",
-                schema: "DepthChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -26,7 +25,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_TeamDepthChart_Teams_TeamId",
                         column: x => x.TeamId,
-                        principalSchema: "DepthChart",
                         principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -34,7 +32,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "PlayerChartIndex",
-                schema: "DepthChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -50,21 +47,18 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_PlayerChartIndex_Players_PayerId",
                         column: x => x.PayerId,
-                        principalSchema: "DepthChart",
                         principalTable: "Players",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PlayerChartIndex_Positions_PositionId",
                         column: x => x.PositionId,
-                        principalSchema: "DepthChart",
                         principalTable: "Positions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PlayerChartIndex_TeamDepthChart_TeamDepthChartId",
                         column: x => x.TeamDepthChartId,
-                        principalSchema: "DepthChart",
                         principalTable: "TeamDepthChart",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -72,25 +66,21 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerChartIndex_PayerId",
-                schema: "DepthChart",
                 table: "PlayerChartIndex",
                 column: "PayerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerChartIndex_PositionId",
-                schema: "DepthChart",
                 table: "PlayerChartIndex",
                 column: "PositionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerChartIndex_TeamDepthChartId",
-                schema: "DepthChart",
                 table: "PlayerChartIndex",
                 column: "TeamDepthChartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeamDepthChart_TeamId",
-                schema: "DepthChart",
                 table: "TeamDepthChart",
                 column: "TeamId");
         }
@@ -99,12 +89,10 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PlayerChartIndex",
-                schema: "DepthChart");
+                name: "PlayerChartIndex");
 
             migrationBuilder.DropTable(
-                name: "TeamDepthChart",
-                schema: "DepthChart");
+                name: "TeamDepthChart");
         }
     }
 }

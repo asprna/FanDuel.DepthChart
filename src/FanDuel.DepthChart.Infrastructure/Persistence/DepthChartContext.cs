@@ -5,23 +5,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FanDuel.DepthChart.Domain.Entities;
+using FanDuel.DepthChart.Application.Contracts.Persistence;
 
 namespace FanDuel.DepthChart.Infrastructure.Persistence
 {
-    public class DepthChartContext : DbContext
+    public class DepthChartContext : DbContext, IApplicationDbContext
     {
-        public const string SchemaName = "DepthChart";
+        //public const string SchemaName = "DepthChart";
         public const string MigrationTable = "__EFMigrationsHistory";
 
         public DepthChartContext(DbContextOptions<DepthChartContext> options) : base(options)
         {
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasDefaultSchema(SchemaName);
+            //modelBuilder.HasDefaultSchema(SchemaName);
 
             modelBuilder.Entity<Sport>()
                 .HasMany(e => e.Positions)

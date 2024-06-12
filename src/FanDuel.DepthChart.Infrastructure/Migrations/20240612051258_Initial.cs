@@ -10,12 +10,8 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "DepthChart");
-
             migrationBuilder.CreateTable(
                 name: "Sports",
-                schema: "DepthChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -29,7 +25,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Positions",
-                schema: "DepthChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -43,7 +38,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Positions_Sports_SportId",
                         column: x => x.SportId,
-                        principalSchema: "DepthChart",
                         principalTable: "Sports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -51,7 +45,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Positions_SportId",
-                schema: "DepthChart",
                 table: "Positions",
                 column: "SportId");
         }
@@ -60,12 +53,10 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Positions",
-                schema: "DepthChart");
+                name: "Positions");
 
             migrationBuilder.DropTable(
-                name: "Sports",
-                schema: "DepthChart");
+                name: "Sports");
         }
     }
 }

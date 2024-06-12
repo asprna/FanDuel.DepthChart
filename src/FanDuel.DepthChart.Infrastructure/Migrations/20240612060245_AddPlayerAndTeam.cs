@@ -12,12 +12,11 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "Teams",
-                schema: "DepthChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     SportId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -26,7 +25,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Teams_Sports_SportId",
                         column: x => x.SportId,
-                        principalSchema: "DepthChart",
                         principalTable: "Sports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -34,7 +32,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Players",
-                schema: "DepthChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -49,7 +46,6 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Players_Teams_TeamId",
                         column: x => x.TeamId,
-                        principalSchema: "DepthChart",
                         principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -57,13 +53,11 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",
-                schema: "DepthChart",
                 table: "Players",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teams_SportId",
-                schema: "DepthChart",
                 table: "Teams",
                 column: "SportId");
         }
@@ -72,12 +66,10 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Players",
-                schema: "DepthChart");
+                name: "Players");
 
             migrationBuilder.DropTable(
-                name: "Teams",
-                schema: "DepthChart");
+                name: "Teams");
         }
     }
 }
