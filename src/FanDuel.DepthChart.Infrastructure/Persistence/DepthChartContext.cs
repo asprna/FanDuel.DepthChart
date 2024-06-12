@@ -36,9 +36,25 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
             modelBuilder.Entity<Position>()
                 .Property(e => e.Name)
                 .IsRequired();
+
+            modelBuilder.Entity<Team>()
+                .HasMany(e => e.Players)
+                .WithOne(e => e.Team)
+                .HasForeignKey(e => e.TeamId)
+                .IsRequired();
+
+            modelBuilder.Entity<Team>()
+                .Property(e => e.Name)
+                .IsRequired();
+
+            modelBuilder.Entity<Player>()
+                .Property(e => e.Name)
+                .IsRequired();
         }
 
         public DbSet<Sport> Sports { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Team> Teams { get; set; }
     }
 }

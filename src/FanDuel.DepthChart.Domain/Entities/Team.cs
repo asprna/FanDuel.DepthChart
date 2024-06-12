@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace FanDuel.DepthChart.Domain.Entities
 {
-    public record Sport
+    public record Team
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Position> Positions { get; } = new List<Position>();
-        public ICollection<Team> Teams { get; } = new List<Team>();
+        public int SportId { get; set; }
+        public Sport Sport { get; set; }
+
+        public ICollection<Player> Players { get; } = new List<Player>();
     }
 }
