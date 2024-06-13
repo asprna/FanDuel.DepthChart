@@ -83,6 +83,6 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamDepthChart> TeamDepthCharts { get; set; }
-        public DbSet<PlayerChartIndex> PlayerChartIndexs { get; set; }
+        public DbSet<PlayerChartIndex> PlayerChartIndexes { get; set; }
     }
 }
