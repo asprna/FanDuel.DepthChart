@@ -7,6 +7,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using FanDuel.DepthChart.Application.Contracts.Business;
+using FanDuel.DepthChart.Application.Services.DepthCharts;
+using Microsoft.Extensions.DependencyInjection;
+using FanDuel.DepthChart.API.Validation;
 
 namespace FanDuel.DepthChart.API
 {
@@ -32,6 +36,21 @@ namespace FanDuel.DepthChart.API
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<DepthChartContext>());
 
+            services.AddTransient<IDepthChartFactory, DepthChartFactory>();
+
+            //services.AddSingleton<Func<string, IDepthChart>>(serviceProvider => key =>
+            //{
+            //    var sender = serviceProvider.GetService<ISender>();
+
+            //    return key switch
+            //    {
+            //        "NFL" => new NFLDepthChart(sender),
+            //        "NRL" => new NRLDepthChart(sender),
+            //        _ => throw new ArgumentException($"No implementation found for depth chart type: {key}")
+            //    };
+            //});
+
+            services.AddValidatorsFromAssemblyContaining<AddDepthChartDtoValidator>();
             services.AddApplication();
 
             services.AddControllers();

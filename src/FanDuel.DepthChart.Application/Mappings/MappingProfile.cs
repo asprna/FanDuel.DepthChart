@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FanDuel.DepthChart.Application.Features.DepthCharts.Commands;
 using FanDuel.DepthChart.Application.Features.Players.Commands;
 using FanDuel.DepthChart.Application.Features.Sports.Commands;
 using FanDuel.DepthChart.Application.Features.Teams.Commands;
@@ -22,6 +23,8 @@ namespace FanDuel.DepthChart.Application.Mappings
             CreateMap<AddTeamsCommand, Team>();
 
             CreateMap<AddPlayersCommand, Player>();
+
+            CreateMap<AddDepthChartCommand, TeamDepthChart>();
         }
     }
 }

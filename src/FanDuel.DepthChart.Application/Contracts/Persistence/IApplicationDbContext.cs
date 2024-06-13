@@ -14,6 +14,8 @@ namespace FanDuel.DepthChart.Application.Contracts.Persistence
         public DbSet<Position> Positions { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamDepthChart> TeamDepthCharts { get; set; }
+        public DbSet<PlayerChartIndex> PlayerChartIndexs { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
