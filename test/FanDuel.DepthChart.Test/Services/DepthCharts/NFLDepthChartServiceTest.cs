@@ -8,6 +8,7 @@ using FanDuel.DepthChart.Application.Features.Players.Queries;
 using FanDuel.DepthChart.Application.Features.Sports.Queries;
 using FanDuel.DepthChart.Application.Features.Teams.Queries;
 using FanDuel.DepthChart.Application.Services.DepthCharts;
+using FanDuel.DepthChart.Domain.Dtos;
 using FanDuel.DepthChart.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -25,13 +26,13 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
     {
         private readonly Mock<IMediator> _mediatorMock;
         private readonly NFLDepthChartService _nflDepthChart;
-        private readonly Mock<IMapper> _mapper;
+        private readonly Mock<IMapper> _mapperMock;
 
         public NFLDepthChartServiceTest()
         {
             _mediatorMock = new Mock<IMediator>();
-            _mapper = new Mock<IMapper>();
-            _nflDepthChart = new NFLDepthChartService(_mediatorMock.Object, _mapper.Object);
+            _mapperMock = new Mock<IMapper>();
+            _nflDepthChart = new NFLDepthChartService(_mediatorMock.Object, _mapperMock.Object);
         }
 
         [Fact]
@@ -184,7 +185,7 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
             };
             _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(player);
-            _mediatorMock.Setup(m => m.Send(It.IsAny<GetLatestChartByPositionIdQuery>(), It.IsAny<CancellationToken>()))
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(chart);
 
             // Act
@@ -215,7 +216,7 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
             };
             _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(player);
-            _mediatorMock.Setup(m => m.Send(It.IsAny<GetLatestChartByPositionIdQuery>(), It.IsAny<CancellationToken>()))
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(chart);
 
             // Act
@@ -224,6 +225,120 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
             // Assert
             _mediatorMock.Verify(m => m.Send(It.Is<UpdatePlayerPositionIndexCommand>(cmd =>
                 cmd.ChartId == 1 && cmd.PositionId == 1 && cmd.PlayerId == 1 && cmd.Rank == 2), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task RemovePlayerFromDepthChart_ShouldThrowBadRequestException_WhenPositionIsInvalid()
+        {
+            // Arrange
+            var playerId = 1;
+            var chartId = (int?)1;
+            var position = "WR";
+
+            var player = new Player
+            {
+                Id = playerId,
+                Team = new Team
+                {
+                    Sport = new Sport
+                    {
+                        Positions = new List<Position>
+                    {
+                        new Position { Name = "QB" } // Position "WR" is missing
+                    }
+                    }
+                }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(player);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<BadRequestException>(() => _nflDepthChart.RemovePlayerFromDepthChart(position, playerId, chartId));
+            Assert.Equal($"Position {position} invalid for the player id {playerId}", exception.Message);
+        }
+
+        [Fact]
+        public async Task RemovePlayerFromDepthChart_ShouldThrowNoContentException_WhenChartIsNotFound()
+        {
+            // Arrange
+            var playerId = 1;
+            var chartId = (int?)1;
+            var position = "WR";
+
+            var player = new Player
+            {
+                Id = playerId,
+                Team = new Team
+                {
+                    Sport = new Sport
+                    {
+                        Positions = new List<Position>
+                    {
+                        new Position { Name = position }
+                    }
+                    }
+                }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(player);
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((TeamDepthChart)null);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<NoContentException>(() => _nflDepthChart.RemovePlayerFromDepthChart(position, playerId, chartId));
+            Assert.Equal("Chart not found", exception.Message);
+        }
+
+        [Fact]
+        public async Task RemovePlayerFromDepthChart_ShouldRemovePlayer_WhenValidRequest()
+        {
+            // Arrange
+            var playerId = 1;
+            var chartId = (int?)1;
+            var position = "WR";
+
+            var player = new Player
+            {
+                Id = playerId,
+                Team = new Team
+                {
+                    Sport = new Sport
+                    {
+                        Positions = new List<Position>
+                    {
+                        new Position { Name = position, Id = 1 }
+                    }
+                    }
+                }
+            };
+
+            var chart = new TeamDepthChart
+            {
+                Id = 1,
+                PlayerChartIndexs = new List<PlayerChartIndex>
+            {
+                new PlayerChartIndex { PayerId = playerId, PositionId = 1 }
+            }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(player);
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(chart);
+
+            _mapperMock.Setup(m => m.Map<PlayerDto>(It.IsAny<Player>()))
+                .Returns(new PlayerDto { Id = playerId });
+
+            // Act
+            var result = await _nflDepthChart.RemovePlayerFromDepthChart(position, playerId, chartId);
+
+            // Assert
+            _mediatorMock.Verify(m => m.Send(It.IsAny<RemovePlayerFromDepthChartCommand>(), It.IsAny<CancellationToken>()), Times.Once);
+            Assert.Equal(playerId, result.Id);
         }
 
         private static int GetWeekNumber(DateTime date)

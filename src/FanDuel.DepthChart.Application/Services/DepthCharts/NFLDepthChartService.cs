@@ -42,12 +42,8 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
 
             var positionId = player.Team.Sport.Positions.Where(p => p.Name == Position).First().Id;
 
-            var chart = await _mediator.Send(new GetDepthChartByIdAndPositionQuery { ChartId = chartId, PositionId = positionId });
-            if (chart?.Id == null)
-            {
-                throw new NoContentException("Unable to find a valid Depth Chart");
-            }
-
+            var chart = await _mediator.Send(new GetDepthChartByIdAndPositionQuery { ChartId = chartId, PositionId = positionId }) ?? throw new NoContentException($"Chart not found");
+            
             //If the Rank is null and Player is already at the bottom, We do not want to change anything
             if (rank == null &&
                 chart.PlayerChartIndexs.Where(p => p.PayerId == PlayerId).FirstOrDefault().Rank == chart.PlayerChartIndexs.Where(i => i.PositionId == positionId).Max(pci => pci.Rank)
@@ -100,11 +96,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
 
             var positionId = player.Team.Sport.Positions.First(p => p.Name == Position).Id;
 
-            var chart = await _mediator.Send(new GetDepthChartByIdAndPositionQuery { ChartId = chartId, PositionId = positionId });
-            if (chart != null) 
-            {
-                throw new NoContentException($"Chart not found");
-            }
+            var chart = await _mediator.Send(new GetDepthChartByIdAndPositionQuery { ChartId = chartId, PositionId = positionId }) ?? throw new NoContentException($"Chart not found");
 
             await _mediator.Send(new RemovePlayerFromDepthChartCommand { ChartId = chart.Id, PlayerId = PlayerId, PositionId = positionId });
 
