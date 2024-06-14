@@ -27,5 +27,16 @@ namespace FanDuel.DepthChart.API.Controllers
         {
             return Ok(await _depthChart.CreateDepthChart(depthChart.TeamId, depthChart.WeekId));
         }
+
+        [HttpPost("addPlayerToDepthChart", Name = "Add player to Depth Chart")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(AddPlayerToDepthChartDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> AddPlayerToDepthChart([FromBody] AddPlayerToDepthChartDto player)
+        {
+            await _depthChart.AddPlayerToDepthChart(player.Position, player.PlayerId, player.Rank, player.ChartId);
+            return Ok();
+        }
     }
 }

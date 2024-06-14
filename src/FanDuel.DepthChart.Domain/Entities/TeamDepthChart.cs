@@ -10,10 +10,11 @@ namespace FanDuel.DepthChart.Domain.Entities
     {
         public int Id { get; set; }
         public int WeekId { get; set; }
+        public DateTime CreatedDateTimeUtc { get; set; }
 
         public int TeamId { get; set; }
         public Team Team { get; set; }
 
-        public ICollection<PlayerChartIndex> PlayerChartIndexs { get; } = new List<PlayerChartIndex>();
+        public ICollection<PlayerChartIndex> PlayerChartIndexs { get; set; } = new List<PlayerChartIndex>();
     }
 }

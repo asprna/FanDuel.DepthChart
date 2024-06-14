@@ -66,4 +66,11 @@ namespace FanDuel.DepthChart.Application.Exceptions
     public class ConflictException(string details) : AppException((int)HttpStatusCode.Conflict, "Conflict", details)
     {
     }
+
+    /// <summary>
+    /// Return Bad Request Error.
+    /// </summary>
+    public class BadRequestException(string details) : AppException((int)HttpStatusCode.BadRequest, "Bad Request", details)
+    {
+    }
 }

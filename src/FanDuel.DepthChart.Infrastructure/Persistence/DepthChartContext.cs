@@ -76,6 +76,18 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
                 .HasMany(e => e.PlayerChartIndexs)
                 .WithOne(e => e.Position)
                 .HasForeignKey(e => e.PositionId);
+
+            modelBuilder.Entity<TeamDepthChart>()
+                .Property(p => p.CreatedDateTimeUtc)
+                .HasDefaultValue(DateTime.UtcNow);
+
+            modelBuilder.Entity<PlayerChartIndex>()
+                .Property(p => p.CreatedDateTimeUtc)
+                .HasDefaultValue(DateTime.UtcNow);
+
+            modelBuilder.Entity<PlayerChartIndex>()
+                .Property(p => p.ModifiedDateTimeUtc)
+                .HasDefaultValue(DateTime.UtcNow);
         }
 
         public DbSet<Sport> Sports { get; set; }

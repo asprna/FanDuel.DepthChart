@@ -10,6 +10,8 @@ namespace FanDuel.DepthChart.Domain.Entities
     {
         public int Id { get; set; }
         public int Rank { get; set; }
+        public DateTime CreatedDateTimeUtc { get; set; }
+        public DateTime ModifiedDateTimeUtc { get; set; }
 
         public int TeamDepthChartId { get; set; }
         public TeamDepthChart TeamDepthChart { get; set; }

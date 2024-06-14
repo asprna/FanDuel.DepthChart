@@ -11,7 +11,7 @@ namespace FanDuel.DepthChart.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Position> Positions { get; } = new List<Position>();
+        public ICollection<Position> Positions { get; set; } = new List<Position>();
         public ICollection<Team> Teams { get; } = new List<Team>();
     }
 }

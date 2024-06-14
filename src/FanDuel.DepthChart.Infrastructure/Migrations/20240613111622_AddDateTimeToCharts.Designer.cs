@@ -3,6 +3,7 @@ using System;
 using FanDuel.DepthChart.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FanDuel.DepthChart.Infrastructure.Migrations
 {
     [DbContext(typeof(DepthChartContext))]
-    partial class DepthChartContextModelSnapshot : ModelSnapshot
+    [Migration("20240613111622_AddDateTimeToCharts")]
+    partial class AddDateTimeToCharts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
@@ -49,12 +52,12 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2024, 6, 13, 11, 25, 43, 584, DateTimeKind.Utc).AddTicks(9044));
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<DateTime>("ModifiedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2024, 6, 13, 11, 25, 43, 584, DateTimeKind.Utc).AddTicks(9241));
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<int>("PayerId")
                         .HasColumnType("INTEGER");
@@ -144,7 +147,7 @@ namespace FanDuel.DepthChart.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(2024, 6, 13, 11, 25, 43, 584, DateTimeKind.Utc).AddTicks(8766));
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("INTEGER");

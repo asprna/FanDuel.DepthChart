@@ -3,6 +3,7 @@ using System;
 using FanDuel.DepthChart.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FanDuel.DepthChart.Infrastructure.Migrations
 {
     [DbContext(typeof(DepthChartContext))]
-    partial class DepthChartContextModelSnapshot : ModelSnapshot
+    [Migration("20240613112545_AddDateTimeToChartsDateTimeDotNet")]
+    partial class AddDateTimeToChartsDateTimeDotNet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");

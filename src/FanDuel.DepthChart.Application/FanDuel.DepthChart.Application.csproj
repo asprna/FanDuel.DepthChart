@@ -18,8 +18,4 @@
     <ProjectReference Include="..\FanDuel.DepthChart.Domain\FanDuel.DepthChart.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\DepthCharts\Queries\" />
-  </ItemGroup>
-
 </Project>
