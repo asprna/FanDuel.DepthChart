@@ -107,9 +107,23 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             return _mapper.Map<List<PlayerDto>>(lowerRankedPlayers);
         }
 
-        public Task<Dictionary<string, List<Player>>> GetFullDepthChart(int? chartId)
+        public async Task<Dictionary<string, List<PlayerDto>>> GetFullDepthChart(int? chartId)
         {
-            throw new NotImplementedException();
+            var chart = await _mediator.Send(new GetDepthChartByIdQuery { ChartId = chartId })
+                ?? throw new NoContentException($"Chart not found");
+
+            var playerDictionary = chart.PlayerChartIndexs
+            .GroupBy(pci => pci.Position.Name)
+            .ToDictionary(
+                g => g.Key,
+                g => g.Select(pci => new PlayerDto
+                {
+                    Name = pci.Player.Name,
+                    Number = pci.Player.Number
+                }).ToList()
+            );
+
+            return playerDictionary;
         }
 
         public async Task<PlayerDto> RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId)

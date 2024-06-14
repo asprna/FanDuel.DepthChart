@@ -20,7 +20,7 @@ namespace FanDuel.DepthChart.API.Controllers
 
         [HttpPost(Name = "Create a Depth Chart for a team")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(AddPlayersCommand), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Post([FromBody] AddDepthChartDto depthChart)
@@ -30,7 +30,7 @@ namespace FanDuel.DepthChart.API.Controllers
 
         [HttpPost("AddPlayerToDepthChart", Name = "Add player to Depth Chart")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(AddPlayerToDepthChartDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> AddPlayerToDepthChart([FromBody] AddPlayerToDepthChartDto player)
@@ -41,22 +41,32 @@ namespace FanDuel.DepthChart.API.Controllers
 
         [HttpDelete("RemovePlayerFromDepthChart", Name = "Remove player from a Depth Chart")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(RemovePlayerFromDepthChartDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PlayerDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> AddPlayerToDepthChart([FromBody] RemovePlayerFromDepthChartDto player)
+        public async Task<IActionResult> RemovePlayerFromDepthChart([FromBody] RemovePlayerFromDepthChartDto player)
         {
             return Ok(await _depthChart.RemovePlayerFromDepthChart(player.Position, player.PlayerId, player.ChartId));
         }
 
         [HttpGet("GetBackups", Name = "Get Player Backups")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(PlayerBacksDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<PlayerDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> GetBackups([FromQuery] PlayerBacksDto player)
         {
             return Ok(await _depthChart.GetBackups(player.Position, player.PlayerId, player.ChartId));
+        }
+
+        [HttpGet("GetFullDepthChart", Name = "Get Full Depth Chart")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(Dictionary<string, List<PlayerDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> GetBackups([FromQuery] int? chartId)
+        {
+            return Ok(await _depthChart.GetFullDepthChart(chartId));
         }
     }
 }

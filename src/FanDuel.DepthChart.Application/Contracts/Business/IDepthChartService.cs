@@ -51,7 +51,7 @@ namespace FanDuel.DepthChart.Application.Contracts.Business
         /// </summary>
         /// <param name="chartId">The ID of the Depth Chart. If not provided, the latest chart will be used.</param>
         /// <returns>A dictionary where the key is the position and the value is a list of players at that position.</returns>
-        Task<Dictionary<string, List<Player>>> GetFullDepthChart(int? chartId);
+        Task<Dictionary<string, List<PlayerDto>>> GetFullDepthChart(int? chartId);
 
     }
 }

@@ -153,7 +153,7 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
             };
             _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(player);
-            _mediatorMock.Setup(m => m.Send(It.IsAny<GetLatestChartByPositionIdQuery>(), It.IsAny<CancellationToken>()))
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync((TeamDepthChart)null);
 
             // Act & Assert
@@ -468,6 +468,66 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
 
             // Act & Assert
             await Assert.ThrowsAsync<NoContentException>(() => _nflDepthChart.GetBackups(position, playerId, chartId));
+        }
+
+        [Fact]
+        public async Task GetFullDepthChart_ShouldReturnPlayerDictionaryGroupedByPosition()
+        {
+            // Arrange
+            var chartId = 1;
+            var chart = new TeamDepthChart
+            {
+                Id = chartId,
+                PlayerChartIndexs = new List<PlayerChartIndex>
+            {
+                new PlayerChartIndex
+                {
+                    Position = new Position { Name = "QB" },
+                    Player = new Player { Name = "Player1", Number = 12 }
+                },
+                new PlayerChartIndex
+                {
+                    Position = new Position { Name = "QB" },
+                    Player = new Player { Name = "Player2", Number = 8 }
+                },
+                new PlayerChartIndex
+                {
+                    Position = new Position { Name = "WR" },
+                    Player = new Player { Name = "Player3", Number = 88 }
+                }
+            }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(chart);
+
+            // Act
+            var result = await _nflDepthChart.GetFullDepthChart(chartId);
+
+            // Assert
+            Assert.Equal(2, result.Count);
+
+            Assert.True(result.ContainsKey("QB"));
+            Assert.Equal(2, result["QB"].Count);
+            Assert.Contains(result["QB"], p => p.Name == "Player1" && p.Number == 12);
+            Assert.Contains(result["QB"], p => p.Name == "Player2" && p.Number == 8);
+
+            Assert.True(result.ContainsKey("WR"));
+            Assert.Single(result["WR"]);
+            Assert.Contains(result["WR"], p => p.Name == "Player3" && p.Number == 88);
+        }
+
+        [Fact]
+        public async Task GetFullDepthChart_ShouldThrowNoContentException_WhenChartNotFound()
+        {
+            // Arrange
+            var chartId = 1;
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((TeamDepthChart)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<NoContentException>(() => _nflDepthChart.GetFullDepthChart(chartId));
         }
 
         private static int GetWeekNumber(DateTime date)

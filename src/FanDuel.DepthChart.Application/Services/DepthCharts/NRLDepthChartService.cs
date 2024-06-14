@@ -27,12 +27,12 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             throw new NotImplementedException();
         }
 
-        public Task<Dictionary<string, List<Player>>> GetFullDepthChart(int? chartId)
+        public Task<Dictionary<string, List<PlayerDto>>> GetFullDepthChart(int? chartId)
         {
             throw new NotImplementedException();
         }
 
-        Task<PlayerDto> IDepthChartService.RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId)
+        public Task<PlayerDto> RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId)
         {
             throw new NotImplementedException();
         }
