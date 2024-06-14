@@ -1,4 +1,5 @@
 ﻿using FanDuel.DepthChart.Application.Contracts.Business;
+using FanDuel.DepthChart.Domain.Dtos;
 using FanDuel.DepthChart.Domain.Entities;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FanDuel.DepthChart.Application.Services.DepthCharts
 {
-    public class NRLDepthChart : IDepthChart
+    public class NRLDepthChartService : IDepthChartService
     {
         public Task AddPlayerToDepthChart(string Position, int PlayerId, int? rank, int? chartId)
         {
@@ -31,7 +32,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             throw new NotImplementedException();
         }
 
-        public Task RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId)
+        Task<PlayerDto> IDepthChartService.RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId)
         {
             throw new NotImplementedException();
         }

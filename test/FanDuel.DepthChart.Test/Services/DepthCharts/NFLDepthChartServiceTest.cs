@@ -1,4 +1,5 @@
-﻿using FanDuel.DepthChart.Application.Contracts.Business;
+﻿using AutoMapper;
+using FanDuel.DepthChart.Application.Contracts.Business;
 using FanDuel.DepthChart.Application.Exceptions;
 using FanDuel.DepthChart.Application.Features.DepthCharts.Commands;
 using FanDuel.DepthChart.Application.Features.DepthCharts.Queries;
@@ -20,16 +21,17 @@ using System.Threading.Tasks;
 
 namespace FanDuel.DepthChart.Test.Services.DepthCharts
 {
-    public class NFLDepthChartTest
+    public class NFLDepthChartServiceTest
     {
         private readonly Mock<IMediator> _mediatorMock;
-        private readonly NFLDepthChart _nflDepthChart;
+        private readonly NFLDepthChartService _nflDepthChart;
+        private readonly Mock<IMapper> _mapper;
 
-
-        public NFLDepthChartTest()
+        public NFLDepthChartServiceTest()
         {
             _mediatorMock = new Mock<IMediator>();
-            _nflDepthChart = new NFLDepthChart(_mediatorMock.Object);
+            _mapper = new Mock<IMapper>();
+            _nflDepthChart = new NFLDepthChartService(_mediatorMock.Object, _mapper.Object);
         }
 
         [Fact]

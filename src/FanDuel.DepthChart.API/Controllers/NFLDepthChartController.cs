@@ -9,10 +9,10 @@ namespace FanDuel.DepthChart.API.Controllers
 {
     public class NFLDepthChartController : ApiControllerBase
     {
-        private readonly IDepthChartFactory _depthChartFactory;
-        private readonly IDepthChart _depthChart;
+        private readonly IDepthChartServiceFactory _depthChartFactory;
+        private readonly IDepthChartService _depthChart;
 
-        public NFLDepthChartController(IDepthChartFactory depthChartFactory)
+        public NFLDepthChartController(IDepthChartServiceFactory depthChartFactory)
         {
             _depthChartFactory = depthChartFactory;
             _depthChart = _depthChartFactory.CreateDepthChart("NFL");
@@ -28,7 +28,7 @@ namespace FanDuel.DepthChart.API.Controllers
             return Ok(await _depthChart.CreateDepthChart(depthChart.TeamId, depthChart.WeekId));
         }
 
-        [HttpPost("addPlayerToDepthChart", Name = "Add player to Depth Chart")]
+        [HttpPost("AddPlayerToDepthChart", Name = "Add player to Depth Chart")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(AddPlayerToDepthChartDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
@@ -37,6 +37,16 @@ namespace FanDuel.DepthChart.API.Controllers
         {
             await _depthChart.AddPlayerToDepthChart(player.Position, player.PlayerId, player.Rank, player.ChartId);
             return Ok();
+        }
+
+        [HttpDelete("RemovePlayerFromDepthChart", Name = "Remove player from a Depth Chart")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(RemovePlayerFromDepthChartDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> AddPlayerToDepthChart([FromBody] RemovePlayerFromDepthChartDto player)
+        {
+            return Ok(await _depthChart.RemovePlayerFromDepthChart(player.Position, player.PlayerId, player.ChartId));
         }
     }
 }

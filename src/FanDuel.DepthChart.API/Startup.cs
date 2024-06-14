@@ -36,7 +36,7 @@ namespace FanDuel.DepthChart.API
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<DepthChartContext>());
 
-            services.AddTransient<IDepthChartFactory, DepthChartFactory>();
+            services.AddTransient<IDepthChartServiceFactory, DepthChartServiceFactory>();
 
             //services.AddSingleton<Func<string, IDepthChart>>(serviceProvider => key =>
             //{

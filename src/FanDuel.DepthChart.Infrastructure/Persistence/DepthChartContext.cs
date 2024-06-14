@@ -79,15 +79,15 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
 
             modelBuilder.Entity<TeamDepthChart>()
                 .Property(p => p.CreatedDateTimeUtc)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("DATETIME('now')");
 
             modelBuilder.Entity<PlayerChartIndex>()
                 .Property(p => p.CreatedDateTimeUtc)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("DATETIME('now')");
 
             modelBuilder.Entity<PlayerChartIndex>()
                 .Property(p => p.ModifiedDateTimeUtc)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("DATETIME('now')");
         }
 
         public DbSet<Sport> Sports { get; set; }

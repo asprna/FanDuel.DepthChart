@@ -14,7 +14,7 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Queries
 {
     public class GetChartByIdAndPositionIdQuery : IRequest<TeamDepthChart>
     {
-        public int ChartId { get; set; }
+        public int? ChartId { get; set; }
         public int PositionId { get; set; }
     }
 

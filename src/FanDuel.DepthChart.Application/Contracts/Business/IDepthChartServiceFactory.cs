@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FanDuel.DepthChart.Application.Contracts.Business
 {
-    public interface IDepthChartFactory
+    public interface IDepthChartServiceFactory
     {
-        IDepthChart CreateDepthChart(string sportType);
+        IDepthChartService CreateDepthChart(string sportType);
     }
 }

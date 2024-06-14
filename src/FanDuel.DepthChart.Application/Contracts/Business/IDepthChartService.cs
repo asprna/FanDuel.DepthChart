@@ -1,4 +1,5 @@
-﻿using FanDuel.DepthChart.Domain.Entities;
+﻿using FanDuel.DepthChart.Domain.Dtos;
+using FanDuel.DepthChart.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace FanDuel.DepthChart.Application.Contracts.Business
     /// This is the main Depth Chart interface.
     /// Individual Depth Charts for each sport should implement this interface.
     /// </summary>
-    public interface IDepthChart
+    public interface IDepthChartService
     {
         /// <summary>
         /// Creates a Depth Chart for a given team.
@@ -36,7 +37,7 @@ namespace FanDuel.DepthChart.Application.Contracts.Business
         /// <param name="playerId">The ID of the player.</param>
         /// <param name="chartId">The ID of the Depth Chart. If not provided, the latest chart will be used.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        Task RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId);
+        Task<PlayerDto> RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId);
         /// <summary>
         /// For a given player and position, gets all the players that are backups.
         /// </summary>

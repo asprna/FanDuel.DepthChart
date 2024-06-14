@@ -3,6 +3,7 @@ using FanDuel.DepthChart.Application.Features.DepthCharts.Commands;
 using FanDuel.DepthChart.Application.Features.Players.Commands;
 using FanDuel.DepthChart.Application.Features.Sports.Commands;
 using FanDuel.DepthChart.Application.Features.Teams.Commands;
+using FanDuel.DepthChart.Domain.Dtos;
 using FanDuel.DepthChart.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace FanDuel.DepthChart.Application.Mappings
             CreateMap<AddPlayersCommand, Player>();
 
             CreateMap<AddDepthChartCommand, TeamDepthChart>();
+
+            CreateMap<Player, PlayerDto>();
         }
     }
 }
