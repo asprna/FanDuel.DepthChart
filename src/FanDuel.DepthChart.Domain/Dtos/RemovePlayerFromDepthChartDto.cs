@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace FanDuel.DepthChart.Domain.Dtos
 {
-    public class RemovePlayerFromDepthChartDto
+    public class RemovePlayerFromDepthChartDto : BasedPlayerDto
     {
-        public int? ChartId { get; set; }
-        public string Position { get; set; }
-        public int PlayerId { get; set; }
     }
 }

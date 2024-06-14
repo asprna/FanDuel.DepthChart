@@ -303,6 +303,7 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
             var player = new Player
             {
                 Id = playerId,
+                Number = 1,
                 Team = new Team
                 {
                     Sport = new Sport
@@ -331,14 +332,142 @@ namespace FanDuel.DepthChart.Test.Services.DepthCharts
                 .ReturnsAsync(chart);
 
             _mapperMock.Setup(m => m.Map<PlayerDto>(It.IsAny<Player>()))
-                .Returns(new PlayerDto { Id = playerId });
+                .Returns(new PlayerDto { Number = player.Number });
 
             // Act
             var result = await _nflDepthChart.RemovePlayerFromDepthChart(position, playerId, chartId);
 
             // Assert
             _mediatorMock.Verify(m => m.Send(It.IsAny<RemovePlayerFromDepthChartCommand>(), It.IsAny<CancellationToken>()), Times.Once);
-            Assert.Equal(playerId, result.Id);
+            Assert.Equal(player.Number, result.Number);
+        }
+
+        [Fact]
+        public async Task GetBackups_ShouldReturnPlayersOrderedByRank()
+        {
+            // Arrange
+            var playerId = 1;
+            var position = "QB";
+            int? chartId = 1;
+
+            var player = new Player
+            {
+                Id = playerId,
+                Team = new Team
+                {
+                    Sport = new Sport
+                    {
+                        Positions = new List<Position> { new Position { Id = 1, Name = position } }
+                    }
+                }
+            };
+
+            var chart = new TeamDepthChart
+            {
+                Id = 1,
+                PlayerChartIndexs = new List<PlayerChartIndex>
+            {
+                new PlayerChartIndex { Player = new Player { Id = 1, Number = 10 }, Rank = 1, Position = new Position { Id = 1, Name = position }, PayerId = 1 },
+                new PlayerChartIndex { Player = new Player { Id = 2, Number = 11 }, Rank = 2, Position = new Position { Id = 1, Name = position }, PayerId = 2 },
+                new PlayerChartIndex { Player = new Player { Id = 3, Number = 12 }, Rank = 3, Position = new Position { Id = 1, Name = position }, PayerId = 3 }
+            }
+            };
+
+            var playerDtos = new List<PlayerDto>
+            {
+                new PlayerDto { Number = 11, Name = "Player 2" },
+                new PlayerDto { Number = 12, Name = "Player 3" }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(player);
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(chart);
+
+            _mapperMock.Setup(m => m.Map<List<PlayerDto>>(It.IsAny<List<Player>>()))
+                .Returns(playerDtos);
+
+            // Act
+            var result = await _nflDepthChart.GetBackups(position, playerId, chartId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
+            Assert.Equal(11, result[0].Number);
+            Assert.Equal(12, result[1].Number);
+        }
+
+        [Fact]
+        public async Task GetBackups_ShouldThrowBadRequestException_WhenPositionIsInvalid()
+        {
+            // Arrange
+            var playerId = 1;
+            var position = "InvalidPosition";
+            int? chartId = 1;
+
+            var player = new Player
+            {
+                Id = playerId,
+                Team = new Team
+                {
+                    Sport = new Sport
+                    {
+                        Positions = new List<Position> { new Position { Id = 1, Name = "QB" } }
+                    }
+                }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(player);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<BadRequestException>(() => _nflDepthChart.GetBackups(position, playerId, chartId));
+        }
+
+        [Fact]
+        public async Task GetBackups_ShouldThrowNoContentException_WhenPlayerNotFound()
+        {
+            // Arrange
+            var playerId = 1;
+            var position = "QB";
+            int? chartId = 1;
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((Player)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<NoContentException>(() => _nflDepthChart.GetBackups(position, playerId, chartId));
+        }
+
+        [Fact]
+        public async Task GetBackups_ShouldThrowNoContentException_WhenChartNotFound()
+        {
+            // Arrange
+            var playerId = 1;
+            var position = "QB";
+            int? chartId = 1;
+
+            var player = new Player
+            {
+                Id = playerId,
+                Team = new Team
+                {
+                    Sport = new Sport
+                    {
+                        Positions = new List<Position> { new Position { Id = 1, Name = position } }
+                    }
+                }
+            };
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetPlayerByIdQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(player);
+
+            _mediatorMock.Setup(m => m.Send(It.IsAny<GetDepthChartByIdAndPositionQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((TeamDepthChart)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<NoContentException>(() => _nflDepthChart.GetBackups(position, playerId, chartId));
         }
 
         private static int GetWeekNumber(DateTime date)

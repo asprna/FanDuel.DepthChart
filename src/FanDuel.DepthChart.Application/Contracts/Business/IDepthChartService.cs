@@ -45,7 +45,7 @@ namespace FanDuel.DepthChart.Application.Contracts.Business
         /// <param name="playerId">The ID of the player.</param>
         /// <param name="chartId">The ID of the Depth Chart. If not provided, the latest chart will be used.</param>
         /// <returns>A list of backup players.</returns>
-        Task<List<Player>> GetBackups(string Position, int PlayerId, int? chartId);
+        Task<List<PlayerDto>> GetBackups(string Position, int PlayerId, int? chartId);
         /// <summary>
         /// Gets the full Depth Chart for a given ID.
         /// </summary>

@@ -22,7 +22,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             throw new NotImplementedException();
         }
 
-        public Task<List<Player>> GetBackups(string Position, int PlayerId, int? chartId)
+        public Task<List<PlayerDto>> GetBackups(string Position, int PlayerId, int? chartId)
         {
             throw new NotImplementedException();
         }

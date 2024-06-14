@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,9 +76,35 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             return result.Id;
         }
 
-        public Task<List<Player>> GetBackups(string Position, int PlayerId, int? chartId)
+        public async Task<List<PlayerDto>> GetBackups(string Position, int PlayerId, int? chartId)
         {
-            throw new NotImplementedException();
+            var player = await _mediator.Send(new GetPlayerByIdQuery { Id = PlayerId })
+                ?? throw new NoContentException($"Player id {PlayerId} not found");
+
+            if (!player.Team.Sport.Positions.Any(p => p.Name == Position))
+            {
+                throw new BadRequestException($"Position {Position} invalid for the player id {PlayerId}");
+            }
+
+            var positionId = player.Team.Sport.Positions.First(p => p.Name == Position).Id;
+
+            var chart = await _mediator.Send(new GetDepthChartByIdAndPositionQuery { ChartId = chartId, PositionId = positionId }) 
+                ?? throw new NoContentException($"Chart not found");
+
+            var playerRank = chart.PlayerChartIndexs.FirstOrDefault(x => x.PayerId == PlayerId);
+            if (playerRank == null) 
+            {
+                return new List<PlayerDto>();
+            }
+
+            // Fetch all players with a higher rank (i.e., lower rank number) than the given player for the specified position
+            var lowerRankedPlayers = chart.PlayerChartIndexs
+                .Where(p => p.Rank > playerRank.Rank)
+                .OrderBy(p => p.Rank)
+                .Select(p => p.Player)
+                .ToList();
+
+            return _mapper.Map<List<PlayerDto>>(lowerRankedPlayers);
         }
 
         public Task<Dictionary<string, List<Player>>> GetFullDepthChart(int? chartId)

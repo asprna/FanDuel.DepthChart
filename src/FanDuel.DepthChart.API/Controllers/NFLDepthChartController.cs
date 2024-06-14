@@ -48,5 +48,15 @@ namespace FanDuel.DepthChart.API.Controllers
         {
             return Ok(await _depthChart.RemovePlayerFromDepthChart(player.Position, player.PlayerId, player.ChartId));
         }
+
+        [HttpGet("GetBackups", Name = "Get Player Backups")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(PlayerBacksDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> GetBackups([FromQuery] PlayerBacksDto player)
+        {
+            return Ok(await _depthChart.GetBackups(player.Position, player.PlayerId, player.ChartId));
+        }
     }
 }

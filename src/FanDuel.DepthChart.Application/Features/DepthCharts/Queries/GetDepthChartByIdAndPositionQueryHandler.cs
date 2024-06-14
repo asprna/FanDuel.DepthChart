@@ -33,7 +33,9 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Queries
             IQueryable<TeamDepthChart> query = _context.TeamDepthCharts
                 .Include(tdc => tdc.Team)
                 .Include(tdc => tdc.PlayerChartIndexs)
-                .ThenInclude(pci => pci.Position);
+                    .ThenInclude(pci => pci.Position)
+                .Include(tdc => tdc.PlayerChartIndexs)
+                    .ThenInclude(pci => pci.Player);
 
             if (request.ChartId.HasValue)
             {

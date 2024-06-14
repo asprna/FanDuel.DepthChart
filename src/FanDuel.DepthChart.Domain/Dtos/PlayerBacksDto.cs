@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace FanDuel.DepthChart.Domain.Dtos
 {
-    public class PlayerDto
+    public class PlayerBacksDto : BasedPlayerDto
     {
-        public string Name { get; set; }
-        public int Number { get; set; }
     }
 }
