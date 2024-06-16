@@ -28,7 +28,7 @@ Minimum API
 * /Player: Create a player for a sport.
 * /Sport: Create a sport.
 * /Team: Create a team for a sport.
-*/NFL/CreateDepthChart: Create a depth chart for a given team and week.
+* /NFL/CreateDepthChart: Create a depth chart for a given team and week.
 * /NFL/AddPlayerToDepthChart: Add a player to the given chart.
 * /NFL/RemovePlayerFromDepthChart: Remove a player from a given chart.
 * /NFL/GetBackups: Get all the backup players for a given player of a chart.
