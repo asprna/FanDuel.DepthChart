@@ -32,6 +32,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
+        /// <inheritdoc />
         public async Task AddPlayerToDepthChart(string Position, int PlayerId, int? rank, int? chartId)
         {
             var player = await _mediator.Send(new GetPlayerByIdQuery { Id = PlayerId });
@@ -76,6 +77,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             return result.Id;
         }
 
+        /// <inheritdoc />
         public async Task<List<PlayerDto>> GetBackups(string Position, int PlayerId, int? chartId)
         {
             var player = await _mediator.Send(new GetPlayerByIdQuery { Id = PlayerId })
@@ -107,6 +109,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             return _mapper.Map<List<PlayerDto>>(lowerRankedPlayers);
         }
 
+        /// <inheritdoc />
         public async Task<Dictionary<string, List<PlayerDto>>> GetFullDepthChart(int? chartId)
         {
             var chart = await _mediator.Send(new GetDepthChartByIdQuery { ChartId = chartId })
@@ -127,6 +130,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             return playerDictionary;
         }
 
+        /// <inheritdoc />
         public async Task<PlayerDto> RemovePlayerFromDepthChart(string Position, int PlayerId, int? chartId)
         {
             var player = await _mediator.Send(new GetPlayerByIdQuery { Id = PlayerId });

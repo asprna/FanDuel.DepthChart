@@ -37,6 +37,9 @@ namespace FanDuel.DepthChart.Application.Features.Sports.Commands
         }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Adding a Sport' feature.
+    /// </summary>
     public class AddSportsCommandHandler : IRequestHandler<AddSportsCommand, int>
     {
         private readonly IApplicationDbContext _context;

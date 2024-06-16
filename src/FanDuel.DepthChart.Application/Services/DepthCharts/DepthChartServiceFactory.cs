@@ -20,6 +20,12 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
             _serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// This factory class accommodates depth chart service creation based on the configuration below.
+        /// </summary>
+        /// <param name="sportType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public IDepthChartService CreateDepthChart(string sportType)
         {
             switch (sportType)

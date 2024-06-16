@@ -15,6 +15,9 @@ namespace FanDuel.DepthChart.Application.Features.Teams.Queries
         public int Id { get; set; }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Finding the correct team for the given id' feature.
+    /// </summary>
     public class GetTeamQueryHandler : IRequestHandler<GetTeamQuery, Team>
     {
         private readonly IApplicationDbContext _context;

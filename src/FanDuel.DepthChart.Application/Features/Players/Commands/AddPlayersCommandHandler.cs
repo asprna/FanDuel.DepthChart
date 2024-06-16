@@ -38,6 +38,9 @@ namespace FanDuel.DepthChart.Application.Features.Players.Commands
         }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Adding a Player' feature.
+    /// </summary>
     public class AddPlayersCommandHandler : IRequestHandler<AddPlayersCommand, int>
     {
         private readonly IApplicationDbContext _context;

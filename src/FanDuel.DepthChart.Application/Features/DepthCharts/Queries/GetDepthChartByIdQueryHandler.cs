@@ -17,6 +17,11 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Queries
         public int? ChartId { get; set; }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Finding the correct chart for the given id' feature.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="logger"></param>
     public class GetDepthChartByIdQueryHandler(IApplicationDbContext context, ILogger<GetDepthChartByIdAndPositionQueryHandler> logger)
         : IRequestHandler<GetDepthChartByIdQuery, TeamDepthChart>
     {
@@ -32,6 +37,7 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Queries
                 .Include(tdc => tdc.PlayerChartIndexs)
                     .ThenInclude(pci => pci.Position);
 
+            //If Id has provided, find the chart by its id, otherwise find the lated id for the team
             if (request.ChartId.HasValue)
             {
                 query = query.Where(tdc => tdc.Id == request.ChartId.Value);

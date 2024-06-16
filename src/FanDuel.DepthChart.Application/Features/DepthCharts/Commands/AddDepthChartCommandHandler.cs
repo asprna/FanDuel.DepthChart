@@ -19,6 +19,9 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Commands
         public int TeamId { get; set; }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'add DepthChart for a team' feature.
+    /// </summary>
     public class AddDepthChartCommandHandler : IRequestHandler<AddDepthChartCommand, TeamDepthChart>
     {
         private readonly IApplicationDbContext _context;

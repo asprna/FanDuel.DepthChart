@@ -20,6 +20,11 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Commands
         public int PositionId { get; set; }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Remove player from a Depth Chart' feature.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="logger"></param>
     public class RemovePlayerFromDepthChartCommandHandler(IApplicationDbContext context, ILogger<GetDepthChartByIdAndPositionQueryHandler> logger)
         : IRequestHandler<RemovePlayerFromDepthChartCommand>
     {

@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Behaviours\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="xunit.runner.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

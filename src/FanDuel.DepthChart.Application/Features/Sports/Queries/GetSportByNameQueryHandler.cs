@@ -16,6 +16,9 @@ namespace FanDuel.DepthChart.Application.Features.Sports.Queries
         public string Name { get; set; }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Finding the correct sport for the given name' feature.
+    /// </summary>
     public class GetSportByNameQueryHandler : IRequestHandler<GetSportByNameQuery, Sport>
     {
         private readonly IApplicationDbContext _context;

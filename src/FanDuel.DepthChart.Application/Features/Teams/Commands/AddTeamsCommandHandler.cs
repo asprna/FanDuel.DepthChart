@@ -37,6 +37,9 @@ namespace FanDuel.DepthChart.Application.Features.Teams.Commands
         }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Adding a team' feature.
+    /// </summary>
     public class AddTeamsCommandHandler : IRequestHandler<AddTeamsCommand, int>
     {
         private readonly IApplicationDbContext _context;

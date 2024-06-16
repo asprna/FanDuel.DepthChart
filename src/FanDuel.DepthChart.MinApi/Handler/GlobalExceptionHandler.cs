@@ -3,10 +3,13 @@ using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-//using System.ComponentModel.DataAnnotations;
 
 namespace FanDuel.DepthChart.MinApi.Handler
 {
+    /// <summary>
+    /// Global Exception Handler.
+    /// All the exception handling logic and problem details mapping go here.
+    /// </summary>
     public class GlobalExceptionHandler : IExceptionHandler
     {
         private readonly ILogger<GlobalExceptionHandler> _logger;

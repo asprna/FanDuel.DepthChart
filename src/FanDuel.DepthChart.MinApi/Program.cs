@@ -1,5 +1,4 @@
 using FanDuel.DepthChart.Application.Features.Players.Commands;
-using FanDuel.DepthChart.Domain.Entities;
 using MediatR;
 using FanDuel.DepthChart.Application;
 using FanDuel.DepthChart.Application.Contracts.Persistence;
@@ -7,13 +6,8 @@ using FanDuel.DepthChart.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using FanDuel.DepthChart.Application.Features.Sports.Commands;
 using FanDuel.DepthChart.Application.Features.Teams.Commands;
-using FanDuel.DepthChart.MinApi.EndPoints;
 using FanDuel.DepthChart.Application.Contracts.Business;
 using FanDuel.DepthChart.Application.Services.DepthCharts;
-using FanDuel.DepthChart.Application.Exceptions;
-//using HellangNamespace = Hellang.Middleware.ProblemDetails;
-//using Hellang.Middleware.ProblemDetails;
-using FanDuel.DepthChart.MinApi.Extensions;
 using FanDuel.DepthChart.MinApi.Handler;
 using FanDuel.DepthChart.Domain.Dtos;
 using FluentValidation;
@@ -37,14 +31,10 @@ builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetServic
 builder.Services.AddTransient<IDepthChartServiceFactory, DepthChartServiceFactory>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
-//builder.Services.AddProblemDetails(option => ConfigureProblemDetails(option));
 
 builder.Services.AddApplication();
 
 var app = builder.Build();
-
-//Global Exception Handling Middleware
-//app.UseProblemDetails();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -175,33 +165,6 @@ app.MapGet("/NFL/GetFullDepthChart", async ([FromQuery] int? chartId, IDepthChar
 .WithName("GetFullDepthChart")
 .WithOpenApi();
 
-//app.MapNFLEndpoints(app.Services.GetRequiredService<IDepthChartServiceFactory>());
 app.Run();
 
 public partial class Program { }
-
-//static void ConfigureProblemDetails(Hellang.Middleware.ProblemDetails.ProblemDetailsOptions options)
-//{
-//    // Custom mapping function for FluentValidation's ValidationException.
-//    options.MapFluentValidationException();
-
-//    options.IncludeExceptionDetails = (ctx, ex) =>
-//    {
-//        // Fetch services from HttpContext.RequestServices
-//        var env = ctx.RequestServices.GetRequiredService<IHostEnvironment>();
-//        return env.IsDevelopment(); //&& !(ex is ValidationException);
-//    };
-
-//    options.ShouldLogUnhandledException = (context, ex, problem) => false;
-//    options.GetTraceId = ctx => null;
-
-//    options.MapToStatusCode<NotImplementedException>(StatusCodes.Status501NotImplemented);
-//    options.MapToStatusCode<HttpRequestException>(StatusCodes.Status503ServiceUnavailable);
-
-//    options.Map<AppException>(ex => new Microsoft.AspNetCore.Mvc.ProblemDetails
-//    {
-//        Title = ex.Title,
-//        Status = ex.StatusCode,
-//        Detail = ex.Details
-//    });
-//}

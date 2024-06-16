@@ -17,6 +17,9 @@ namespace FanDuel.DepthChart.Application.Features.Players.Queries
      
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'find the player by Id' feature.
+    /// </summary>
     public class GetPlayerByIdQueryHandler : IRequestHandler<GetPlayerByIdQuery, Player>
     {
         private readonly IApplicationDbContext _context;

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.ConsoleApp", "src\FanDuel.DepthChart.ConsoleApp\FanDuel.DepthChart.ConsoleApp.csproj", "{BA1A8D83-936F-4F99-90BE-66CDA040850F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4F8F1835-7374-4679-B070-359B4A9D27AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9C497F5F-63D4-43A1-96E8-16D231D6BC61}"
@@ -15,16 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Infrastructure", "src\FanDuel.DepthChart.Infrastructure\FanDuel.DepthChart.Infrastructure.csproj", "{AF93C512-7599-4F83-A27B-DE67E0EE8272}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App_Data", "App_Data", "{CC66D8AC-4BA3-43E6-AFF0-16731981D540}"
-	ProjectSection(SolutionItems) = preProject
-		App_Data\FanDuelDepthChart.db = App_Data\FanDuelDepthChart.db
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.API", "src\FanDuel.DepthChart.API\FanDuel.DepthChart.API.csproj", "{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Test", "test\FanDuel.DepthChart.Test\FanDuel.DepthChart.Test.csproj", "{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.MinApi", "src\FanDuel.DepthChart.MinApi\FanDuel.DepthChart.MinApi.csproj", "{3D8B706F-586A-40FC-93A9-4FB925F0F087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.MinApi", "src\FanDuel.DepthChart.MinApi\FanDuel.DepthChart.MinApi.csproj", "{3D8B706F-586A-40FC-93A9-4FB925F0F087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA1A8D83-936F-4F99-90BE-66CDA040850F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE16C267-8860-4169-AC79-037FDBB35D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE16C267-8860-4169-AC79-037FDBB35D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE16C267-8860-4169-AC79-037FDBB35D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,10 +35,6 @@ Global
 		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF93C512-7599-4F83-A27B-DE67E0EE8272}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,11 +48,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BA1A8D83-936F-4F99-90BE-66CDA040850F} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 		{EE16C267-8860-4169-AC79-037FDBB35D43} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 		{22C3F9DD-03E4-42FC-B845-8318BEBAA489} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 		{AF93C512-7599-4F83-A27B-DE67E0EE8272} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
-		{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D} = {9C497F5F-63D4-43A1-96E8-16D231D6BC61}
 		{3D8B706F-586A-40FC-93A9-4FB925F0F087} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 	EndGlobalSection

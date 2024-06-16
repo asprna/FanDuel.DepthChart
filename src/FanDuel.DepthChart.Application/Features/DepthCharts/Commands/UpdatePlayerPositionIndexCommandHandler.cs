@@ -18,6 +18,9 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Commands
         public int? Rank { get; set; }
     }
 
+    /// <summary>
+    /// This handler is responsible for managing all the logic related to the 'Updating a player current position' feature.
+    /// </summary>
     public class UpdatePlayerPositionIndexCommandHandler : IRequestHandler<UpdatePlayerPositionIndexCommand>
     {
         private readonly IApplicationDbContext _context;
@@ -68,29 +71,8 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Commands
                     .FirstOrDefault()
                     .Rank = (int)request.Rank;
             }
-            
-            //AddPlayerChartIndex(teamDepthChart, newPlayerIndex, request.Rank, request.PositionId);
 
             await _context.SaveChangesAsync(cancellationToken);
-        }
-
-        public static void AddPlayerChartIndex(TeamDepthChart teamDepthChart, PlayerChartIndex newPlayerChartIndex, int? newRank, int positionId)
-        {
-            if (newRank == null)
-            {
-                newRank = teamDepthChart.PlayerChartIndexs.Any(i => i.PositionId == positionId)
-                    ? teamDepthChart.PlayerChartIndexs.Where(i => i.PositionId == positionId).Max(pci => pci.Rank) + 1
-                    : 1;
-            }
-
-            newPlayerChartIndex.Rank = newRank.Value;
-
-            foreach (var pci in teamDepthChart.PlayerChartIndexs.Where(pci => pci.Rank >= newRank.Value && pci.PositionId == positionId).OrderBy(pci => pci.Rank))
-            {
-                pci.Rank++;
-            }
-
-            teamDepthChart.PlayerChartIndexs.Add(newPlayerChartIndex);
         }
     }
 
