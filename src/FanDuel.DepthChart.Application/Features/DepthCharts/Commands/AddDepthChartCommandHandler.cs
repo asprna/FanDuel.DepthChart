@@ -3,6 +3,7 @@ using FanDuel.DepthChart.Application.Contracts.Persistence;
 using FanDuel.DepthChart.Application.Exceptions;
 using FanDuel.DepthChart.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,13 @@ namespace FanDuel.DepthChart.Application.Features.DepthCharts.Commands
 
         public async Task<TeamDepthChart> Handle(AddDepthChartCommand request, CancellationToken cancellationToken)
         {
+            var depthChartForGivenWeek = await _context.TeamDepthCharts.FirstOrDefaultAsync(x => x.WeekId == request.WeekId && x.TeamId == request.TeamId);
+
+            if (depthChartForGivenWeek != null) 
+            { 
+                return depthChartForGivenWeek; 
+            }
+
             var depthChart = _mapper.Map<TeamDepthChart>(request);
 
             var newDepthChart = await _context.TeamDepthCharts.AddAsync(depthChart);

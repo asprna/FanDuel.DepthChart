@@ -113,6 +113,7 @@ namespace FanDuel.DepthChart.Application.Services.DepthCharts
                 ?? throw new NoContentException($"Chart not found");
 
             var playerDictionary = chart.PlayerChartIndexs
+            .OrderBy(p => p.Rank)
             .GroupBy(pci => pci.Position.Name)
             .ToDictionary(
                 g => g.Key,
