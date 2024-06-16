@@ -81,6 +81,11 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
                 .Property(p => p.CreatedDateTimeUtc)
                 .HasDefaultValueSql("DATETIME('now')");
 
+            //Adding a NON-Clustered Index for CreatedDateTimeUtc
+            //To improve query performance on finding the latest DepthChart
+            modelBuilder.Entity<TeamDepthChart>()
+                .HasIndex(p => p.CreatedDateTimeUtc);
+
             modelBuilder.Entity<PlayerChartIndex>()
                 .Property(p => p.CreatedDateTimeUtc)
                 .HasDefaultValueSql("DATETIME('now')");
@@ -88,6 +93,11 @@ namespace FanDuel.DepthChart.Infrastructure.Persistence
             modelBuilder.Entity<PlayerChartIndex>()
                 .Property(p => p.ModifiedDateTimeUtc)
                 .HasDefaultValueSql("DATETIME('now')");
+
+            //Adding a NON-Clustered Index for Rank
+            //To improve query performance on finding a player for a specific rank
+            modelBuilder.Entity<PlayerChartIndex>()
+                .HasIndex(p => p.Rank);
         }
 
         public DbSet<Sport> Sports { get; set; }
