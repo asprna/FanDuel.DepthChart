@@ -59,24 +59,21 @@ app.UseExceptionHandler();
 
 app.MapPost("Player", async (AddPlayersCommand player, ISender _mediator) =>
 {
-    var result = await _mediator.Send(player);
-    return Results.Ok();
+    return Results.Ok(await _mediator.Send(player));
 })
 .WithName("AddPlayer")
 .WithOpenApi();
 
 app.MapPost("Sport", async (AddSportsCommand sport, ISender _mediator) =>
 {
-    var result = await _mediator.Send(sport);
-    return Results.Ok();
+    return Results.Ok(await _mediator.Send(sport));
 })
 .WithName("AddSport")
 .WithOpenApi();
 
 app.MapPost("Team", async (AddTeamsCommand team, ISender _mediator) =>
 {
-    var result = await _mediator.Send(team);
-    return Results.Ok();
+    return Results.Ok(await _mediator.Send(team));
 })
 .WithName("AddTeam")
 .WithOpenApi();
@@ -180,6 +177,8 @@ app.MapGet("/NFL/GetFullDepthChart", async ([FromQuery] int? chartId, IDepthChar
 
 //app.MapNFLEndpoints(app.Services.GetRequiredService<IDepthChartServiceFactory>());
 app.Run();
+
+public partial class Program { }
 
 //static void ConfigureProblemDetails(Hellang.Middleware.ProblemDetails.ProblemDetailsOptions options)
 //{

@@ -9,7 +9,7 @@ namespace FanDuel.DepthChart.Domain.Dtos
 {
     public class AddDepthChartDto
     {
-        public int WeekId { get; set; }
+        public int? WeekId { get; set; }
         public int TeamId { get; set; }
     }
 }

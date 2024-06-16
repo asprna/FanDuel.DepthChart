@@ -30,7 +30,7 @@ namespace FanDuel.DepthChart.Application.Features.Sports.Commands
                 .MaximumLength(50).WithMessage("Name must not exceed 50 characters");
 
             RuleFor(p => p.Positions)
-                .NotNull().WithMessage("Positions cannot be null")
+                .NotEmpty().WithMessage("Positions cannot be null")
                 .Must(positions => positions.All(pos => pos.Length <= 3))
                 .WithMessage("Each position must be less than or equal to 3 characters.");
 

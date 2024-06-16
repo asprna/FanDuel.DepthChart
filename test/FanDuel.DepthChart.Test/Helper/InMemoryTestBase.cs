@@ -12,7 +12,11 @@ namespace FanDuel.DepthChart.Test.Helper
     {
         protected readonly DepthChartContext _context;
 
-        public InMemoryTestBase()
+        public InMemoryTestBase() : this(false)
+        {
+        }
+
+        public InMemoryTestBase(bool noData)
         {
             var options = new DbContextOptionsBuilder<DepthChartContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -22,7 +26,10 @@ namespace FanDuel.DepthChart.Test.Helper
 
             _context.Database.EnsureCreated();
 
-            DepthChartInitializer.Initializer(_context);
+            if (!noData) 
+            {
+                DepthChartInitializer.Initializer(_context);
+            }
         }
 
         public void Dispose()

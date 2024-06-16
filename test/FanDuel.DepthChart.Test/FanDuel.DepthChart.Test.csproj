@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FanDuel.DepthChart.API\FanDuel.DepthChart.API.csproj" />
     <ProjectReference Include="..\..\src\FanDuel.DepthChart.Infrastructure\FanDuel.DepthChart.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\FanDuel.DepthChart.MinApi\FanDuel.DepthChart.MinApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +30,12 @@
 
   <ItemGroup>
     <Folder Include="Application\Behaviours\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
