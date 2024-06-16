@@ -21,14 +21,9 @@ namespace FanDuel.DepthChart.Test.IntegrationTest
     public class NFLIntegrationEndtoEndTest : IClassFixture<InMemoryApiTestBase>
     {
         private readonly HttpClient _client;
-        private readonly ITestOutputHelper _output;
 
-        public NFLIntegrationEndtoEndTest(InMemoryApiTestBase testBase, ITestOutputHelper output)
-        {
-            _client = testBase.Client;
-            _output = output;
-        }
-
+        public NFLIntegrationEndtoEndTest(InMemoryApiTestBase testBase) => _client = testBase.Client;
+        
         [Fact]
         public async Task NFL_SingleTeam_CurrentWeek_DepthChartTest()
         {
@@ -107,8 +102,7 @@ namespace FanDuel.DepthChart.Test.IntegrationTest
             // 10. call getBackups(“QB”, Kyle Trask)
             backups = await _client.GetFromJsonAsync<List<PlayerDto>>($"/NFL/GetBackups?position=QB&playerId={playerIds[2]}");
             Assert.Empty(backups);
-            _output.WriteLine(backups.ToString());
-
+            
             // 11. getFullDepthChart()
             Dictionary<string, List<PlayerDto>> depthChart = await _client.GetFromJsonAsync<Dictionary<string, List<PlayerDto>>>($"/NFL/GetFullDepthChart");
             Assert.Equal(2, depthChart.Count);

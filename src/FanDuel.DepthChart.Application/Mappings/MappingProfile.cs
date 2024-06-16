@@ -25,7 +25,11 @@ namespace FanDuel.DepthChart.Application.Mappings
 
             CreateMap<AddPlayersCommand, Player>();
 
-            CreateMap<AddDepthChartCommand, TeamDepthChart>();
+            CreateMap<AddDepthChartCommand, TeamDepthChart>()
+                .AfterMap((src, dest) =>
+                {
+                    dest.CreatedDateTimeUtc = DateTime.UtcNow;
+                });
 
             CreateMap<Player, PlayerDto>();
         }
