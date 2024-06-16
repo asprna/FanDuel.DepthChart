@@ -14,19 +14,19 @@ namespace FanDuel.DepthChart.MinApi.EndPoints
         {
             var depthChartService = depthChartFactory.CreateDepthChart("NFL");
 
-            app.MapPost("/NFL/CreateDepthChart", async (AddDepthChartDto depthChart, IValidator<AddDepthChartDto> validator) => 
-            {
-                ValidationResult validationResult = await validator.ValidateAsync(depthChart);
+            //app.MapPost("/NFL/CreateDepthChart", async (AddDepthChartDto depthChart, IValidator<AddDepthChartDto> validator) => 
+            //{
+            //    ValidationResult validationResult = await validator.ValidateAsync(depthChart);
 
-                if (!validationResult.IsValid)
-                {
-                    return Results.ValidationProblem(validationResult.ToDictionary());
-                }
+            //    if (!validationResult.IsValid)
+            //    {
+            //        return Results.ValidationProblem(validationResult.ToDictionary());
+            //    }
 
-                return Results.Ok(await depthChartService.CreateDepthChart(depthChart.TeamId, depthChart.WeekId)); 
-            })
-            .WithName("CreateDepthChart")
-            .WithOpenApi();
+            //    return Results.Ok(await depthChartService.CreateDepthChart(depthChart.TeamId, depthChart.WeekId)); 
+            //})
+            //.WithName("CreateDepthChart")
+            //.WithOpenApi();
 
             app.MapPost("/NFL/AddPlayerToDepthChart", async (AddPlayerToDepthChartDto player, IValidator<AddPlayerToDepthChartDto> validator) =>
             {

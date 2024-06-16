@@ -11,6 +11,7 @@ using FanDuel.DepthChart.Application.Contracts.Business;
 using FanDuel.DepthChart.Application.Services.DepthCharts;
 using Microsoft.Extensions.DependencyInjection;
 using FanDuel.DepthChart.API.Validation;
+using FanDuel.DepthChart.API.Handlers;
 
 namespace FanDuel.DepthChart.API
 {
@@ -37,6 +38,8 @@ namespace FanDuel.DepthChart.API
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<DepthChartContext>());
 
             services.AddTransient<IDepthChartServiceFactory, DepthChartServiceFactory>();
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
 
             //services.AddSingleton<Func<string, IDepthChart>>(serviceProvider => key =>
             //{
@@ -71,6 +74,7 @@ namespace FanDuel.DepthChart.API
             }
 
             app.UseHttpsRedirection();
+            app.UseExceptionHandler();
 
             app.UseRouting();
 
