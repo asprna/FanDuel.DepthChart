@@ -1,0 +1,6 @@
+@FanDuel.DepthChart.MinApi_HostAddress = http://localhost:5192
+
+GET {{FanDuel.DepthChart.MinApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -20,9 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App_Data", "App_Data", "{CC
 		App_Data\FanDuelDepthChart.db = App_Data\FanDuelDepthChart.db
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.API", "src\FanDuel.DepthChart.API\FanDuel.DepthChart.API.csproj", "{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.API", "src\FanDuel.DepthChart.API\FanDuel.DepthChart.API.csproj", "{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.Test", "test\FanDuel.DepthChart.Test\FanDuel.DepthChart.Test.csproj", "{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FanDuel.DepthChart.Test", "test\FanDuel.DepthChart.Test\FanDuel.DepthChart.Test.csproj", "{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanDuel.DepthChart.MinApi", "src\FanDuel.DepthChart.MinApi\FanDuel.DepthChart.MinApi.csproj", "{3D8B706F-586A-40FC-93A9-4FB925F0F087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,10 @@ Global
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D8B706F-586A-40FC-93A9-4FB925F0F087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D8B706F-586A-40FC-93A9-4FB925F0F087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D8B706F-586A-40FC-93A9-4FB925F0F087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D8B706F-586A-40FC-93A9-4FB925F0F087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{AF93C512-7599-4F83-A27B-DE67E0EE8272} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 		{0A38DF17-FDBD-43EC-AEE2-A4D2CE9D00C9} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 		{4984F9E0-DA7E-4B6D-8C91-D73EE5490E6D} = {9C497F5F-63D4-43A1-96E8-16D231D6BC61}
+		{3D8B706F-586A-40FC-93A9-4FB925F0F087} = {4F8F1835-7374-4679-B070-359B4A9D27AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD4F5195-99A5-4C09-891D-E75E0F5B8B85}

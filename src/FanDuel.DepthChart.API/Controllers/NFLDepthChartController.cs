@@ -4,17 +4,23 @@ using FanDuel.DepthChart.Application.Features.Players.Commands;
 using System.Net;
 using FanDuel.DepthChart.Application.Features.DepthCharts.Commands;
 using FanDuel.DepthChart.Domain.Dtos;
+using FluentValidation;
+using System;
+using Microsoft.AspNetCore.Http.HttpResults;
+using FluentValidation.Results;
 
 namespace FanDuel.DepthChart.API.Controllers
 {
     public class NFLDepthChartController : ApiControllerBase
     {
         private readonly IDepthChartServiceFactory _depthChartFactory;
+        private readonly IValidator<AddDepthChartDto> _validator;
         private readonly IDepthChartService _depthChart;
 
-        public NFLDepthChartController(IDepthChartServiceFactory depthChartFactory)
+        public NFLDepthChartController(IDepthChartServiceFactory depthChartFactory, IValidator<AddDepthChartDto> validator)
         {
             _depthChartFactory = depthChartFactory;
+            _validator = validator;
             _depthChart = _depthChartFactory.CreateDepthChart("NFL");
         }
 
@@ -25,6 +31,19 @@ namespace FanDuel.DepthChart.API.Controllers
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Post([FromBody] AddDepthChartDto depthChart)
         {
+            ValidationResult result = await _validator.ValidateAsync(depthChart);
+
+            if (!result.IsValid)
+            {
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                //result.AddToModelState(this.ModelState);
+
+                // re-render the view when validation failed.
+                return BadRequest(result.Errors);
+            }
+
             return Ok(await _depthChart.CreateDepthChart(depthChart.TeamId, depthChart.WeekId));
         }
 

@@ -13,7 +13,10 @@ namespace FanDuel.DepthChart.Application.Validation
         public AddDepthChartDtoValidator()
         {
             RuleFor(p => p.WeekId)
-                .GreaterThan(0).WithMessage("Invalid week id");
+                .GreaterThan(0).WithMessage("Invalid Week id");
+
+            RuleFor(p => p.TeamId)
+                .GreaterThan(0).WithMessage("Invalid Team id");
         }
     }
 }
