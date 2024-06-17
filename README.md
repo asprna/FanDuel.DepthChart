@@ -2,9 +2,9 @@
 This microservice allows users to add and manage team weekly depth charts, supporting multiple depth charts for multiple teams. Currently, it only supports NFL, but it can be easily extended to other sports.
 
 ## Technologies Used
-.NET 8
-SQLite Database
-Minimum API
+* .NET 8
+* SQLite Database
+* Minimum API
 
 ## Software Patterns Used
 * Clean Architecture
