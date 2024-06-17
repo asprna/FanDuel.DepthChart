@@ -39,3 +39,4 @@ This microservice allows users to add and manage team weekly depth charts, suppo
 * Restore the NuGet packages.
 * Use the attached SQLite database. If it's not available, create a new database using the command Update-Database from the Package Manager Console under the API project.
 * Start the FanDuel.DepthChart.MinApi API. The Swagger page contains all the above endpoints, allowing you to test the application.
+* Explore the data using SQLite Browser: https://sqlitebrowser.org/dl/
