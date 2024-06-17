@@ -17,7 +17,7 @@ This microservice allows users to add and manage team weekly depth charts, suppo
 * Depth charts are created for each week. If the week is not provided during chart creation, the application will assume it is for the current week and generate the week number accordingly.
 * Week number calculations are specific to each sport.
 
-## Service Explanations
+## Service Implementation Details
 * To extend this for another sport, configure the creation logic in DepthChartServiceFactory and implement the service class from IDepthChartService.
 * The GlobalExceptionHandler is used to handle all application errors, preventing the need to wrap try-catch blocks in most places.
 * The ProblemDetails class is used to convert HTTP responses to human-readable responses.
